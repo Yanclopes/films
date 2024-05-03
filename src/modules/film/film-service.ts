@@ -7,17 +7,27 @@ export class FilmService {
   async getFilm() {
     try {
       if (films.length === 0) {
-        new Error('No film found with this file');
+        return {
+          error: false,
+          id: 0,
+          data: {
+            name: 'Sem filmes',
+            films: 'Sem filmes',
+          },
+        };
       }
 
       const randomIndex = Math.floor(Math.random() * films.length);
       return {
+        error: false,
         id: randomIndex,
         data: films[randomIndex],
       };
     } catch (error) {
-      console.log(error);
-      new Error('No film found with this file');
+      return {
+        error: true,
+        id: 0,
+      };
     }
   }
 
